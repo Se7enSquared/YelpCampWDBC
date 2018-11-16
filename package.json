@@ -1,0 +1,23 @@
+{
+  "name": "yelpcamp",
+  "version": "1.0.0",
+  "description": "Yelp Camp app for Web Dev Bootcamp by Colt Steele",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Se7enSquared/YelpCampWDBC.git"
+  },
+  "author": "Heather Gray & Colt Steele",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Se7enSquared/YelpCampWDBC/issues"
+  },
+  "homepage": "https://github.com/Se7enSquared/YelpCampWDBC#readme",
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "express": "^4.16.4"
+  }
+}
