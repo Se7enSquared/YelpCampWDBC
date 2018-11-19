@@ -1,13 +1,13 @@
-let express = require("express"),
+let express = require('express'),
     app = express(),
-    bodyParser = require("body-parser"),
-    mongoose = require("mongoose")
+    bodyParser = require('body-parser'),
+    mongoose = require('mongoose')
 
-mongoose.connect("mongodb://localhost:27017");
+mongoose.connect('mongodb://localhost:27017');
 app.use(bodyParser.urlencoded({
     extended: true
 }));
-app.set("view engine", "ejs");
+app.set('view engine', 'ejs');
 
 // SCHEMA SETUP
 let campgroundSchema = new mongoose.Schema({
@@ -16,19 +16,20 @@ let campgroundSchema = new mongoose.Schema({
     description: String
 });
 
-let Campground = mongoose.model("Campground", campgroundSchema);
+let Campground = mongoose.model('Campground', campgroundSchema);
 
 Campground.create({
-        name: "Granite Hill",
-        image: "https://farm1.staticflickr.com/60/215827008_6489cd30c3.jpg",
-        description: "This is a huge granite hill, no bathrooms.  No water. Beautiful granite!"
+        name: 'Granite Hill',
+        image: 'https://farm1.staticflickr.com/60/215827008_6489cd30c3.jpg',
+    description: 'This is a huge granite hill, no bathrooms.  No water. ' +
+        'Beautiful granite!'
 
     },
     function (err, campground) {
         if (err) {
             console.log(err);
         } else {
-            console.log("NEWLY CREATED CAMPGROUND: ");
+            console.log('NEWLY CREATED CAMPGROUND: ');
             console.log(campground);
         }
     });
