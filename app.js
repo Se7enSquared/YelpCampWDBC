@@ -1,9 +1,12 @@
-let express = require('express');
-let app = express();
-let bodyParser = require('body-parser');
+let express     = require('express'),     
+    app         = express(),
+    bodyParser  = require('body-parser'),
+    mongoose    = require('mongoose')
+    
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+
 
 let campgrounds = [{
     name: 'Salmon Creek',
