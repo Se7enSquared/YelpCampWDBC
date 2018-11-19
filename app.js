@@ -1,39 +1,37 @@
-let express     = require('express'),     
-    app         = express(),
-    bodyParser  = require('body-parser'),
-    mongoose    = require('mongoose')
-    
+let express = require("express"),
+    app = express(),
+    bodyParser = require("body-parser"),
+    mongoose = require("mongoose")
+
+mongoose.connect("mongodb://localhost:27017");
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+app.set("view engine", "ejs");
 
-
-connect('mongodb://localhost/yelp_camp');
-app.use(urlencoded({
-    extended: true
-}));
-
-// schema TODO: Refactor
-
+// SCHEMA SETUP
 let campgroundSchema = new mongoose.Schema({
     name: String,
-    image: String
-}, function (err, campground) {
-    if (err) {
-        console.log(err);
-    } else {
-        console.log('New CG created: ');
-        console.log(campground);
-    }
+    image: String,
+    description: String
 });
 
-// model
-let Campground = mongoose.model('Campground', campgroundSchema);
+let Campground = mongoose.model("Campground", campgroundSchema);
 
 Campground.create({
-    name: 'test',
-    image: 'https://i.imgur.com/brkOt7m.jpg'
-})
+        name: "Granite Hill",
+        image: "https://farm1.staticflickr.com/60/215827008_6489cd30c3.jpg",
+        description: "This is a huge granite hill, no bathrooms.  No water. Beautiful granite!"
+
+    },
+    function (err, campground) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log("NEWLY CREATED CAMPGROUND: ");
+            console.log(campground);
+        }
+    });
 
 let campgrounds = [{
         name: 'Salmon Creek',
