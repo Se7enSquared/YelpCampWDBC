@@ -1,4 +1,4 @@
-let express = require('express'),
+const express = require('express'),
     app = express(),
     bodyParser = require('body-parser'),
     mongoose = require('mongoose')
@@ -20,29 +20,33 @@ let Campground = mongoose.model('Campground', campgroundSchema);
 
 app.set('view engine', 'ejs');
 
-
+// LANDING route
 app.get('/', function (req, res) {
     res.render('landing');
 });
 
+// INDEX route
 app.get('/campgrounds', function (req, res) {
     Campground.find({}, function (err, allcampgrounds) {
         if (err) {
             console.log(err);
         } else {
-            res.render('campgrounds', {
+            res.render('index', {
                 campgrounds: allcampgrounds
             });
         }
     });
 });
 
+// CREATE (post route)
 app.post('/campgrounds', function (req, res) {
     let name = req.body.name;
     let image = req.body.image;
+    let description = req.body.description;
     let newCampground = {
         name: name,
-        image: image
+        image: image,
+        description: description
     };
     Campground.create(newCampground, function (err, newlyCreatedCampground) {
         if (err) {
@@ -50,13 +54,24 @@ app.post('/campgrounds', function (req, res) {
         } else {
             res.redirect('/campgrounds');
         }
-        res.redirect('/campgrounds');
     });
 });
 
-
+// NEW route
 app.get('/campgrounds/new', function (req, res) {
     res.render('new');
+});
+
+// SHOW route - shows additional info about campground
+app.get('/campgrounds/:id', function (req, res) {
+    Campground.findById(req.params.id, function (err, foundCampground) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.render('show', {campground: foundCampground}); 
+        }
+    })
+    
 });
 
 app.listen(1000, function (req, res) {
